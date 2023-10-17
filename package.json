@@ -7,7 +7,8 @@
     "start": "node src/server.js",
     "debug": "nodemon --ignore coverage src/server.js",
     "lint": "eslint --no-inline-config --no-error-on-unmatched-pattern -c .eslintrc.json . --ext .js, .jsx",
-    "initdb": "node db/init-db.js"
+    "initdb": "node db/init-db.js",
+    "test": "mocha --exit"
   },
   "repository": {
     "type": "git",

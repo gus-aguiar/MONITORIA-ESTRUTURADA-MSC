@@ -25,21 +25,21 @@ const insert = async (burger) => {
 };
 
 const updateById = async (id, name) => {
-  const result = await connection.execute(
+  const [{ affectedRow }] = await connection.execute(
     `UPDATE TryBurger.burgers SET name = ? WHERE id = ?;
     `,
     [name, id],
   );
-  return result;
+  return affectedRow;
 };
 
 const deleteById = async (id) => {
-  const result = await connection.execute(
+  const [{ affectedRow }] = await connection.execute(
     `DELETE FROM TryBurger.burgers WHERE id = ?;
     `,
     [id],
   );
-  return result;
+  return affectedRow;
 };
 
 module.exports = {
@@ -48,5 +48,4 @@ module.exports = {
   insert,
   updateById,
   deleteById,
-  
 };

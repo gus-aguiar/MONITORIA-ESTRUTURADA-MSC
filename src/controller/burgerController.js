@@ -1,8 +1,8 @@
 const burgerService = require('../service/burgerService');
 
 const getAll = async (_req, res) => {
-  const burgers = await burgerService.getAll();
-  return res.status(200).json(burgers);
+  const { message } = await burgerService.getAll();
+  return res.status(200).json(message);
 };
 
 const getById = async (req, res) => {

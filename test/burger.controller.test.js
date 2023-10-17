@@ -30,16 +30,13 @@ const dataToUpdate = { name: 'X-Hook' };
 
 const NOT_FOUND = 'Burger not found';
 
-describe('burgerModel', function () {
+describe('burgerController', function () {
   let req;
   let res;
 
   beforeEach(function () {
     req = {};
-    res = {
-      status: sinon.stub().returns(),
-      json: sinon.stub().returns(),
-    };
+    res = {};
   });
 
   afterEach(function () {
@@ -48,6 +45,9 @@ describe('burgerModel', function () {
 
   describe('GET /burgers', function () {
     it('get all burgers successfully', async function () {
+      res.status = sinon.stub().returns(res);
+      res.json = sinon.stub().returns();
+
       sinon
         .stub(burgerService, 'getAll')
         .resolves({
@@ -65,6 +65,8 @@ describe('burgerModel', function () {
   describe('GET /burgers/:id', function () {
     it('get a burger by id', async function () {
       req.params = { id: 1 };
+      res.status = sinon.stub().returns(res);
+      res.json = sinon.stub().returns();
 
       sinon
         .stub(burgerService, 'getById')
@@ -81,11 +83,13 @@ describe('burgerModel', function () {
 
     it('cannot get a burger with an invalid id', async function () {
       req.params = { id: 99 };
+      res.status = sinon.stub().returns(res);
+      res.json = sinon.stub().returns();
 
       sinon
         .stub(burgerService, 'getById')
         .resolves({
-          type: 'NOT_FOUND',
+          type: 422,
           message: NOT_FOUND,
         });
 
@@ -99,6 +103,8 @@ describe('burgerModel', function () {
   describe('PUT /burgers', function () {
     it('create a new burger', async function () {
       req.body = newBurger;
+      res.status = sinon.stub().returns(res);
+      res.json = sinon.stub().returns();
 
       sinon
         .stub(burgerService, 'insert')
@@ -114,37 +120,41 @@ describe('burgerModel', function () {
     });
 
     it('cannot create a burger with an invalid name', async function () {
-      req.body = { name: 'Burg' };
+      req.body = { name: 'BK' };
+      res.status = sinon.stub().returns(res);
+      res.json = sinon.stub().returns();
 
       sinon
         .stub(burgerService, 'insert')
         .resolves({
-          type: 'INVALID_DATA',
-          message: '"name" length must be at least 5 characters long',
+          type: 422,
+          message: 'Name is too short',
         });
 
       await burgerController.insert(req, res);
 
       expect(res.status).to.have.been.calledWith(422);
       expect(res.json).to.have.been.calledWith({
-        message: '"name" length must be at least 5 characters long',
+        message: 'Name is too short',
       });
     });
 
     it('cannot create a burger without a name', async function () {
       req.body = {};
+      res.status = sinon.stub().returns(res);
+      res.json = sinon.stub().returns();
 
       sinon
         .stub(burgerService, 'insert')
         .resolves({
-          type: 'BAD_REQUEST',
-          message: '"name" is required',
+          type: 400,
+          message: 'Name is required',
         });
 
       await burgerController.insert(req, res);
 
       expect(res.status).to.have.been.calledWith(400);
-      expect(res.json).to.have.been.calledWith({ message: '"name" is required' });
+      expect(res.json).to.have.been.calledWith({ message: 'Name is required' });
     });
   });
 
@@ -152,6 +162,8 @@ describe('burgerModel', function () {
     it('update an existing burger', async function () {
       req.params = { id: 1 };
       req.body = dataToUpdate;
+      res.status = sinon.stub().returns(res);
+      res.json = sinon.stub().returns();
 
       sinon
         .stub(burgerService, 'updateById')
@@ -169,11 +181,13 @@ describe('burgerModel', function () {
     it('cannot update a burger with an invalid id', async function () {
       req.params = { id: 99 };
       req.body = dataToUpdate;
+      res.status = sinon.stub().returns(res);
+      res.json = sinon.stub().returns();
 
       sinon
         .stub(burgerService, 'updateById')
         .resolves({
-          type: 'NOT_FOUND',
+          type: 404,
           message: NOT_FOUND,
         });
 
@@ -187,6 +201,8 @@ describe('burgerModel', function () {
   describe('DELETE /burgers/:id', function () {
     it('delete a burger', async function () {
       req.params = { id: 1 };
+      res.status = sinon.stub().returns(res);
+      res.json = sinon.stub().returns();
 
       sinon
         .stub(burgerService, 'deleteById')
@@ -199,11 +215,13 @@ describe('burgerModel', function () {
 
     it('cannot delete a burger with an invalid id', async function () {
       req.params = { id: 99 };
+      res.status = sinon.stub().returns(res);
+      res.json = sinon.stub().returns();
 
       sinon
         .stub(burgerService, 'deleteById')
         .resolves({
-          type: 'NOT_FOUND',
+          type: 404,
           message: NOT_FOUND,
         });
 
