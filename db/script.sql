@@ -1,8 +1,8 @@
-DROP DATABASE IF EXISTS StoreManager;
-CREATE DATABASE StoreManager;
-USE StoreManager;
+DROP DATABASE IF EXISTS TryBurger;
+CREATE DATABASE TryBurger;
+USE TryBurger;
 
-CREATE TABLE products (
+CREATE TABLE burgers (
   id INT NOT NULL auto_increment,
   name VARCHAR(30) NOT NULL,
   PRIMARY KEY(id)
@@ -11,7 +11,7 @@ CREATE TABLE products (
 SET SQL_SAFE_UPDATES = 0;
 SET FOREIGN_KEY_CHECKS = 1;
 
-INSERT INTO products (name) VALUES
+INSERT INTO burgers (name) VALUES
   ("Burger SASSboroso"),
   ("PyBurger"),
   ("CheeseHook");
