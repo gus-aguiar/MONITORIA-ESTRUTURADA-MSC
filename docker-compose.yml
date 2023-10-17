@@ -4,7 +4,7 @@ services:
   # Serviço que irá rodar o node
   node:
     image: node:16.14
-    container_name: meMSC
+    container_name: TryBurger_db_api
     # Mesmo que `docker run -t`
     tty: true
     # Mesmo que `docker run -i`
@@ -28,10 +28,10 @@ services:
     
   database:
     image: mysql:8.0.29
-    container_name: meMSC_db
+    container_name: TryBurger_db
     environment:
       MYSQL_ROOT_PASSWORD: password
-      MYSQL_DATABASE: meMSC
+      MYSQL_DATABASE: TryBurger
     ports:
       - 3306:3306
     volumes:
