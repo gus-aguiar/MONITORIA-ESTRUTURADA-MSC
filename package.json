@@ -23,6 +23,7 @@
   "devDependencies": {
     "chai": "^4.3.10",
     "eslint-config-trybe-backend": "^2.1.0",
+    "mocha": "^10.2.0",
     "nodemon": "^2.0.22",
     "prettier": "^3.0.3",
     "sinon": "^16.1.0",

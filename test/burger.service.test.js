@@ -1,7 +1,7 @@
 const sinon = require('sinon');
 const { expect } = require('chai');
-const { burgerService } = require('../src/services');
-const { burgerModel } = require('../src/models');
+const burgerService = require('../src/service/burgerService');
+const burgerModel = require('../src/model/burgerModel');
 
 const burgers = [
   {

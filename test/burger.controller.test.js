@@ -1,8 +1,8 @@
 const chai = require('chai');
 const sinon = require('sinon');
 const sinonChai = require('sinon-chai');
-const { burgerController } = require('../src/controllers');
-const { burgerService } = require('../src/services');
+const burgerController = require('../src/controller/burgerController');
+const burgerService = require('../src/service/burgerService');
 
 const { expect } = chai;
 chai.use(sinonChai);
