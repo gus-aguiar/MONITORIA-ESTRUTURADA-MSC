@@ -30,9 +30,19 @@ const updateById = async (id, name) => {
   return { type: null, message: { id, name } };
 };
 
+const deleteById = async (id) => {
+  if (!id) return { type: 400, message: 'Id is Required' };
+  const [result] = await burgerModel.deleteById(id);
+  if (result.affectedRows === 0) {
+    return { type: 404, message: 'Burger not found' };
+  }
+  return { type: null };
+};
+
 module.exports = {
   getAll,
   getById,
   insert,
   updateById,
+  deleteById,
 };

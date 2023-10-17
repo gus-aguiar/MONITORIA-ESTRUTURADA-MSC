@@ -33,10 +33,20 @@ const updateById = async (id, name) => {
   return result;
 };
 
+const deleteById = async (id) => {
+  const result = await connection.execute(
+    `DELETE FROM TryBurger.burgers WHERE id = ?;
+    `,
+    [id],
+  );
+  return result;
+};
+
 module.exports = {
   getAll,
   getById,
   insert,
   updateById,
+  deleteById,
   
 };
