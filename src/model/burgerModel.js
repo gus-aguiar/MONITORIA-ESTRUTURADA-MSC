@@ -2,18 +2,18 @@ const connection = require('./connection');
 // commit test
 
 const getAll = async () => {
-  const [products] = await connection.execute(
+  const [burgers] = await connection.execute(
     'SELECT * FROM TryBurger.burgers;',
   );
-  return products;
+  return burgers;
 };
 
 const getById = async (id) => {
-  const [[product]] = await connection.execute(
+  const [[burger]] = await connection.execute(
     'SELECT * FROM TryBurger.burgers WHERE id = ?;',
     [id],
   );
-  return product;
+  return burger;
 };
 
 const insert = async (burger) => {
