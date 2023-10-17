@@ -16,19 +16,19 @@ const getById = async (id) => {
   return product;
 };
 
-const insert = async (product) => {
+const insert = async (burger) => {
   const [{ insertId }] = await connection.execute(
     'INSERT INTO TryBurger.burgers (name) VALUES (?)',
-    [product.name],
+    [burger.name],
   );
   return insertId;
 };
 
-const updateById = async (productId, productName) => {
+const updateById = async (id, name) => {
   const result = await connection.execute(
-    `UPDATE StoreManager.products SET name = ? WHERE id = ?;
+    `UPDATE TryBurger.burgers SET name = ? WHERE id = ?;
     `,
-    [productName, productId],
+    [name, id],
   );
   return result;
 };
