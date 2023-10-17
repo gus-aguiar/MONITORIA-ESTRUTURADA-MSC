@@ -2,7 +2,7 @@ const burgerModel = require('../model/burgerModel');
 
 const getAll = async () => {
   const burgers = await burgerModel.getAll();
-  return burgers;
+  return { type: null, message: burgers };
 };
 
 const getById = async (id) => {
@@ -21,19 +21,18 @@ const insert = async (burger) => {
 
 const updateById = async (id, name) => {
   if (!name) return { type: 400, message: 'Name is Required' };
-  if (!id) return { type: 400, message: 'Id is Required' };
-  const [result] = await burgerModel.updateById(id, name);
-  
-  if (result.affectedRows === 0) {
+  const result = await burgerModel.updateById(id, name);
+
+  if (result === 0) {
     return { type: 404, message: 'Burger not found' };
-  } 
+  }
   return { type: null, message: { id, name } };
 };
 
 const deleteById = async (id) => {
   if (!id) return { type: 400, message: 'Id is Required' };
-  const [result] = await burgerModel.deleteById(id);
-  if (result.affectedRows === 0) {
+  const result = await burgerModel.deleteById(id);
+  if (result === 0) {
     return { type: 404, message: 'Burger not found' };
   }
   return { type: null };
