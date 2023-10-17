@@ -1,0 +1,38 @@
+{
+  "name": "monitoria-estruturada-msc",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "start": "node src/server.js",
+    "debug": "nodemon --ignore coverage src/server.js",
+    "lint": "eslint --no-inline-config --no-error-on-unmatched-pattern -c .eslintrc.json . --ext .js, .jsx",
+    "initdb": "node db/init-db.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/gus-aguiar/MONITORIA-ESTRUTURADA-MSC.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/gus-aguiar/MONITORIA-ESTRUTURADA-MSC/issues"
+  },
+  "homepage": "https://github.com/gus-aguiar/MONITORIA-ESTRUTURADA-MSC#readme",
+  "devDependencies": {
+    "chai": "^4.3.10",
+    "eslint-config-trybe-backend": "^2.1.0",
+    "nodemon": "^2.0.22",
+    "prettier": "^3.0.3",
+    "sinon": "^16.1.0",
+    "sinon-chai": "^3.7.0"
+  },
+  "dependencies": {
+    "camelize": "^1.0.1",
+    "dotenv": "^16.3.1",
+    "express": "^4.18.2",
+    "mysql2": "^2.3.0",
+    "snakeize": "^0.1.0"
+  }
+}
