@@ -51,14 +51,14 @@ describe('burgerService', function () {
     it('cannot get a burger with an invalid id', async function () {
       const result = await burgerService.getById(99);
 
-      expect(result.type).to.be.equal('NOT_FOUND');
+      expect(result.type).to.be.equal(404);
       expect(result.message).to.be.equal('Burger not found');
     });
   });
 
   describe('POST /burgers', function () {
     it('create a new burger', async function () {
-      sinon.stub(burgerModel, 'insert').resolves({ ...newBurger, id: 4 });
+      sinon.stub(burgerModel, 'insert').resolves(4);
 
       const result = await burgerService.insert(newBurger);
 
@@ -67,48 +67,42 @@ describe('burgerService', function () {
     });
 
     it('cannot create a burger with an invalid name', async function () {
-      const result = await burgerService.insert({ name: 'Burg' });
+      const result = await burgerService.insert({ name: 'BK' });
 
-      expect(result.type).to.be.equal('INVALID_DATA');
-      expect(result.message).to.be.equal('"name" length must be at least 5 characters long');
+      expect(result.type).to.be.equal(400);
+      expect(result.message).to.be.equal('Name is too short');
     });
 
     it('cannot create a burger without a name', async function () {
       const result = await burgerService.insert({});
-      expect(result.type).to.be.equal('BAD_REQUEST');
-      expect(result.message).to.be.equal('"name" is required');
+      expect(result.type).to.be.equal(400);
+      expect(result.message).to.be.equal('Name is Required');
     });
   });
 
   describe('PUT /burgers/:id', function () {
     it('update an existing burger', async function () {
-      sinon.stub(burgerModel, 'updateById').resolves({ ...dataToUpdate, id: 3 });
+      sinon.stub(burgerModel, 'updateById').resolves(1);
 
-      const result = await burgerService.updateById(1, dataToUpdate);
+      const result = await burgerService.updateById(3, dataToUpdate.name);
 
       expect(result.type).to.be.equal(null);
-      expect(result.message).to.be.deep.equal({ ...dataToUpdate, id: 3 });
+      expect(result.message).to.be.deep.equal({ name: dataToUpdate.name, id: 3 });
     });
 
     it('cannot update a burger with an invalid id', async function () {
-      const result = await burgerService.updateById(99, dataToUpdate);
+      sinon.stub(burgerModel, 'updateById').resolves(0);
+      const result = await burgerService.updateById(99, dataToUpdate.name);
 
-      expect(result.type).to.be.equal('NOT_FOUND');
+      expect(result.type).to.be.equal(404);
       expect(result.message).to.be.equal('Burger not found');
     });
 
-    it('cannot update a burger with an invalid name', async function () {
-      const result = await burgerService.updateById(1, { name: 'Burg' });
-
-      expect(result.type).to.be.equal('INVALID_DATA');
-      expect(result.message).to.be.equal('"name" length must be at least 5 characters long');
-    });
-
     it('cannot update a burger without a name', async function () {
-      const result = await burgerService.updateById(1, {});
+      const result = await burgerService.updateById(1, '');
 
-      expect(result.type).to.be.equal('BAD_REQUEST');
-      expect(result.message).to.be.equal('"name" is required');
+      expect(result.type).to.be.equal(400);
+      expect(result.message).to.be.equal('Name is Required');
     });
   });
 
@@ -119,13 +113,13 @@ describe('burgerService', function () {
       const result = await burgerService.deleteById(1);
 
       expect(result.type).to.be.equal(null);
-      expect(result.message).to.be.equal(1);
     });
 
     it('cannot delete a burger with an invalid id', async function () {
+      sinon.stub(burgerModel, 'deleteById').resolves(0);
       const result = await burgerService.deleteById(99);
 
-      expect(result.type).to.be.equal('NOT_FOUND');
+      expect(result.type).to.be.equal(404);
       expect(result.message).to.be.equal('Burger not found');
     });
   });

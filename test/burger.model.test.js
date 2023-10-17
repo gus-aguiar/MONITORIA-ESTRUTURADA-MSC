@@ -55,16 +55,16 @@ describe('burgerModel', function () {
     // ACT
     const result = await burgerModel.insert(newBurger);
     // ASSERTION
-    expect(result).to.be.deep.equal({ ...newBurger, id: 4 });
+    expect(result).to.be.equal(4);
   });
 
   it('update an existing burger', async function () {
     // ARRANGE
-    sinon.stub(conn, 'execute').resolves({ ...dataToUpdate, id: 3 });
+    sinon.stub(conn, 'execute').resolves([{ affectedRow: 1 }]);
     // ACT
-    const result = await burgerModel.updateById(dataToUpdate);
+    const result = await burgerModel.updateById(3, dataToUpdate.name);
     // ASSERTION
-    expect(result).to.be.deep.equal({ ...dataToUpdate, id: 3 });
+    expect(result).to.be.deep.equal(1);
   });
 
   it('delete a burger', async function () {
