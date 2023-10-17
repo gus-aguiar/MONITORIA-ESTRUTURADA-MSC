@@ -80,7 +80,7 @@ describe('burgerService', function () {
     });
   });
 
-  describe('PUT /burgers', function () {
+  describe('PUT /burgers/:id', function () {
     it('update an existing burger', async function () {
       sinon.stub(burgerModel, 'updateById').resolves({ ...dataToUpdate, id: 3 });
 
@@ -94,7 +94,7 @@ describe('burgerService', function () {
       const result = await burgerService.updateById(99, dataToUpdate);
 
       expect(result.type).to.be.equal('NOT_FOUND');
-      expect(result.message).to.be.equal('Product not found');
+      expect(result.message).to.be.equal('Burger not found');
     });
 
     it('cannot update a burger with an invalid name', async function () {
@@ -112,7 +112,7 @@ describe('burgerService', function () {
     });
   });
 
-  describe('DELETE /burgers', function () {
+  describe('DELETE /burgers/:id', function () {
     it('delete a burger', async function () {
       sinon.stub(burgerModel, 'deleteById').resolves(1);
 
@@ -126,7 +126,7 @@ describe('burgerService', function () {
       const result = await burgerService.deleteById(99);
 
       expect(result.type).to.be.equal('NOT_FOUND');
-      expect(result.message).to.be.equal('Product not found');
+      expect(result.message).to.be.equal('Burger not found');
     });
   });
 });
