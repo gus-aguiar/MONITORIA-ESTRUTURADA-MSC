@@ -13,7 +13,28 @@ const insertBurgersOrders = async (orderId, burgerId, quantity) => {
     'INSERT INTO TryBurger.orders_burgers (order_id, burger_id, quantity) VALUES (?, ?, ?)',
     [orderId, burgerId, quantity],
   );
-  console.log(result);
+
+  return result;
+};
+
+const getOrderById = async (orderId) => {
+  const [result] = await connection.execute(
+    `SELECT t1.date, t2.order_id, quantity
+    FROM TryBurger.orders AS t1
+    INNER JOIN TryBurger.orders_burgers AS t2 ON t1.id = t2.order_id
+    WHERE t2.order_id = ?`,
+    [orderId],
+  );
+
+  return result;
+};
+
+const getAllOrders = async () => {
+  const [result] = await connection.execute(
+    `SELECT t1.date, t2.order_id, quantity
+    FROM TryBurger.orders AS t1
+    INNER JOIN TryBurger.orders_burgers AS t2 ON t1.id = t2.order_id`,
+  );
 
   return result;
 };
@@ -21,4 +42,6 @@ const insertBurgersOrders = async (orderId, burgerId, quantity) => {
 module.exports = {
   insert,
   insertBurgersOrders,
+  getOrderById,
+  getAllOrders,
 };

@@ -13,5 +13,7 @@ app.post('/burgers', burgerController.insert);
 app.put('/burgers/:id', burgerController.updateById);
 app.delete('/burgers/:id', burgerController.deleteById);
 app.post('/orders', validateOrder, ordersController.insert);
+app.get('/orders/:id', ordersController.getOrderById);
+app.get('/orders', ordersController.getAllOrders);
 
 module.exports = app;
