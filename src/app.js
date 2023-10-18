@@ -1,5 +1,7 @@
 const express = require('express');
 const burgerController = require('./controller/burgerController');
+const ordersController = require('./controller/ordersController');
+const { validateOrder } = require('./middleware/validateOrder');
 
 const app = express();
 
@@ -10,5 +12,6 @@ app.get('/burgers/:id', burgerController.getById);
 app.post('/burgers', burgerController.insert);
 app.put('/burgers/:id', burgerController.updateById);
 app.delete('/burgers/:id', burgerController.deleteById);
+app.post('/orders', validateOrder, ordersController.insert);
 
 module.exports = app;
