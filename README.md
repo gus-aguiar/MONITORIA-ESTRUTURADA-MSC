@@ -6,13 +6,11 @@ Este é o repositório da mentoria estruturada de 18/2023 sobre arquitetura MSC 
 
 O repositório conta com 5 branches:
 
-*implementando-rota-pedidos* - resolução da joana, com o código todo pronto
+*implementando-rota-pedidos* - resolução da Joana, com o código todo pronto
 
-*resolucao* - resolução do projeto sem o código desenvolvido em aula
-
+*resolucao* - resolução do projeto sem o código desenvolvido na monitoria
 
 *testes* - resolução dos testes da aplicação
-
 
 *boiler-plate* - boiler plate
 
