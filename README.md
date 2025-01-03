@@ -1,8 +1,8 @@
 # MONITORIA-ESTRUTURADA-MSC
 
-# Repositório de Mentoria Estruturada de Arquitetura MSC da Trybe (18/10/2023)
+# Repositório de Mentoria Estruturada de Arquitetura de software da Trybe (18/10/2023)
 
-Este é o repositório da mentoria estruturada de 18/2023 sobre arquitetura MSC da Trybe.
+Este é o repositório da mentoria estruturada de 18/10/2023 sobre arquitetura MSC da Trybe.
 
 O repositório conta com 5 branches:
 
